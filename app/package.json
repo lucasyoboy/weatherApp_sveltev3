@@ -26,8 +26,10 @@
 	"dependencies": {
 		"@sveltejs/adapter-node": "^4.0.1",
 		"chart.js": "^4.4.2",
+		"luxon": "^3.4.4",
 		"mdbsvelte": "^1.0.12",
 		"pocketbase": "^0.21.1",
+		"svelte-carousel": "^1.0.25",
 		"svelte-chartjs": "^3.1.5",
 		"svelte-weather": "^1.0.1"
 	}
