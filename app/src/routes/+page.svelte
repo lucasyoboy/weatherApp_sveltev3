@@ -13,6 +13,8 @@
     import Humidity from 'svelte-weather/Humidity.svelte';
     import Barometer from 'svelte-weather/Barometer.svelte';
     import Refresh from 'svelte-weather/Refresh.svelte';
+    import { CarBatterySolid, SolarPanelSolid } from 'svelte-awesome-icons';
+
     import Chart from "./component/chart.svelte";
 
     import {onDestroy, onMount } from 'svelte';
@@ -42,19 +44,21 @@
 </script>
 
 <div class="container-fluid mx-auto  text-teal-500 font-Assistant" >
-  <div class="flex justify-center items-center h-screen flex-col">
+  <div class="flex justify-center items-center lg:h-screen flex-col">
     <div class="flex justify-end w-full items-center px-5">
       <Refresh  size="50"/><span class="text-lg"> hace  {$clock} secundos</span>
     </div>
     <div class="my-auto">
       <h1 class="text-center text-4xl mb-5 font-semibold">Datos actuales de la estación</h1>
-      <div class="flex flex-row items-center justify-center gap-14">
-        <img alt="Weather Status Image" src="https://csndb.lucasdev.app/api/files/0oppacza93448t8/xyl2h7ni4qrsjnj/01d_uB2AVa2kEG.svg" class=" h-72 w-72"/>
-        <div class="flex flex-col">
+      <div class="flex flex-col lg:flex-row w-full items-center justify-center gap-5 lg:gap-14">
+        <div class="w-full lg:w-1/3 flex justify-center">
+          <img alt="Weather Status Image" src="https://csndb.lucasdev.app/api/files/0oppacza93448t8/xyl2h7ni4qrsjnj/01d_uB2AVa2kEG.svg" class=" h-72 w-72"/>
+        </div>
+        <div class="flex flex-col w-full lg:w-1/3 justify-center">
           {#if TempScale}
-            <span class=" text-10xl text-black">{(Math.round(item.temperature)*9/5) + 32}</span>
+            <span class=" text-10xl text-center text-black">{(Math.round(item.temperature)*9/5) + 32}</span>
           {:else}
-          <span class=" text-10xl text-black">{Math.round(item.temperature)}</span>
+          <span class=" text-10xl text-center text-black">{Math.round(item.temperature)}</span>
           {/if}
           <div class="flex justify-center items-center">
             {#if TempScale}
@@ -64,19 +68,29 @@
             {/if}
           </div>
         </div>
-        <div class="flex flex-col items-left text-3xl gap-8 justify-center">
-          <div class="flex flex-row gap-4 items-end justify-center">
+        <div class="w-full lg:w-1/3 flex flex-col items-left text-3xl gap-8 justify-center">
+          <div class="flex flex-row gap-4 items-end justify-center lg:justify-start">
             <StrongWind size="50"/>
             <span class="text-5xl font-bold inline-block">{maxWind}<p class="text-sm  inline-block font-normal">(max)</p> &nbsp;<p class="text-xl  inline-block font-normal">km/h</p></span>
           </div>
-          <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-row gap-4 items-end justify-center lg:justify-start">
             <Humidity  size="50"/>
             <span class="text-5xl font-bold inline-block">{Math.round(item.humidity)} &nbsp;<p class="text-xl  inline-block font-normal">%</p></span>
           </div>
-          <div class="flex flex-row gap-4 items-end">
+          <div class="flex flex-row gap-4 items-end justify-center lg:justify-start">
             <Barometer size="50"/>
             <span class="text-5xl font-bold inline-block">{Math.round(item.pressure)} &nbsp;<p class="text-xl  inline-block font-normal">hPa</p></span>
           </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-10 justify-center items-center mt-10 text-2xl">
+        <div class=" flex justify-center items-center">
+          <CarBatterySolid size="30" class="inline-block"/>
+          <span class="inline-block font-bold">&nbsp;&nbsp;{Math.round(item.battery_voltage*100) /100}<p class=" inline-block font-normal text-lg">&nbsp;Volt</p></span>
+        </div>
+        <div class=" flex justify-center items-center">
+          <SolarPanelSolid size="30" class="inline-block"/>
+          <span class="inline-block font-bold">&nbsp;&nbsp;{Math.round(item.solar_voltage*100) /100}<p class=" inline-block font-normal text-lg">&nbsp;Volt</p></span>
         </div>
       </div>
       <!--
